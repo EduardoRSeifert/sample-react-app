@@ -23,14 +23,14 @@ function GifFeed() {
     };
   }, []);
 
-  const doTheSearch = useCallback(async () => {
+  const handleSearch = useCallback(async () => {
     try {
       setLoading(true);
       const searchOpts = { offset: offset, limit: 10 }
       const fetchedData = await fetchFromGiphy(searchQuery, searchOpts);
       setSearchResult((prevResult) => [...prevResult, ...fetchedData.data]);
     } catch (error) {
-      console.error('Error in doTheSearch:', error);
+      console.error('Error in handleSearch:', error);
     } finally {
       setLoading(false);
     }
@@ -38,8 +38,8 @@ function GifFeed() {
 
   useEffect(() => {
     if(offset === 0) return;
-    doTheSearch();
-  }, [offset, searchQuery, doTheSearch]);
+    handleSearch();
+  }, [offset, searchQuery, handleSearch]);
 
   return (
     <div className='container'>
@@ -56,7 +56,7 @@ function GifFeed() {
       </div>
       <div className='row mt-3'>
         <div className='col-4'/>
-        <button onClick={doTheSearch} className='col-4 btn btn-primary'>
+        <button onClick={handleSearch} className='col-4 btn btn-primary'>
           Search
         </button>
       </div>

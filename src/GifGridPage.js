@@ -20,41 +20,59 @@ function GifGridPage() {
   }, [animal, tvShow, disneyCharacter, country]);
 
   return (
-    <div>
-      <h1>Gif Grid Page</h1>
-      <div>
-        <input 
-          type="text" 
-          value={animal} 
-          onChange={(e) => setAnimal(e.target.value)}
-          placeholder="Favourite Animal"
-        />
+    <div className='container'>
+      <div className='row mt-3'>
+        <div className='col'>
+          <div>
+            <input
+              className='form-control'
+              type="text"
+              value={animal}
+              onChange={(e) => setAnimal(e.target.value)}
+              placeholder="Favourite Animal"
+            />
+          </div>
+        </div>
+        <div className='col'>
+          <div>
+            <input
+              className='form-control'
+              type="text"
+              value={tvShow}
+              onChange={(e) => setTvShow(e.target.value)}
+              placeholder="Favourite Tv Show"
+            />
+          </div>
+        </div>
+        <div className='col'>
+          <div>
+            <input
+              className='form-control'
+              type="text"
+              value={disneyCharacter}
+              onChange={(e) => setDisneyCharacter(e.target.value)}
+              placeholder="Favourite Disney Character"
+            />
+          </div>
+        </div>
+        <div className='col'>
+          <div>
+            <input
+              className='form-control'
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              placeholder="Favourite Country"
+            />
+          </div>
+        </div>
       </div>
-      <div>
-        <input
-          type="text"
-          value={tvShow}
-          onChange={(e) => setTvShow(e.target.value)}
-          placeholder="Favourite Tv Show"
-        />
+      <div className='row mt-3'>
+        <div className='col-4'/>
+        <button onClick={handleSearch} className='col-4 btn btn-primary'>
+          Search
+        </button>
       </div>
-      <div>
-        <input
-          type="text"
-          value={disneyCharacter}
-          onChange={(e) => setDisneyCharacter(e.target.value)}
-          placeholder="Favourite Disney Character"
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          placeholder="Favourite Country"
-        />
-      </div>
-      <button onClick={handleSearch}>Search</button>
       {gifsData && <GifGrid {...gifsData} />}
     </div>
   );

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Grid, GridColumn as Column } from '@progress/kendo-react-grid';
 
 function GifGrid({ animal, tvShow, disneyCharacter, country }) {
-  const [maxGifWidth, setMaxGifWidth] = useState(200); // Initial width, adjust as needed
+  const [maxGifWidth, setMaxGifWidth] = useState(200);
 
   useEffect(() => {
-    // Calculate the maximum width from all gif arrays
     const allGifs = [animal, tvShow, disneyCharacter, country].flatMap((data) => data.data || []);
     const maxWidth = Math.max(...allGifs.map((gif) => gif.images.fixed_height.width));
-    
-    // Update the state with the maximum width
+
     setMaxGifWidth(maxWidth);
   }, [animal, tvShow, disneyCharacter, country]);
 
