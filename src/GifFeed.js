@@ -26,7 +26,8 @@ function GifFeed() {
   const doTheSearch = useCallback(async () => {
     try {
       setLoading(true);
-      let fetchedData = await fetchFromGiphy(searchQuery, offset);
+      const searchOpts = { offset: offset, limit: 10 }
+      const fetchedData = await fetchFromGiphy(searchQuery, searchOpts);
       setSearchResult((prevResult) => [...prevResult, ...fetchedData.data]);
     } catch (error) {
       console.error('Error in doTheSearch:', error);
