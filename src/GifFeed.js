@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import fetchFromGiphy from './FetchFromGiphy';
 
-function GiphySearch() {
+function GifFeed() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const [searchResult, setSearchResult] = useState([]);
@@ -81,4 +81,4 @@ function GiphySearch() {
   );
 };
 
-export default GiphySearch;
+export default GifFeed;
