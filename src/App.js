@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import GifFeed from './GifFeed';
 import Home from './Home';
+import GifGridPage from './GifGridPage';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
             <Link className="navbar-brand" to="/gif-feed">
               Gif Feed
             </Link>
+            <Link className="navbar-brand" to="/gif-grid">
+              Gif Grid
+            </Link>
           </div>
         </nav>
 
@@ -22,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/gif-feed" element={<GifFeed />} />
             <Route path="/" element={<Home/>} />
+            <Route path="/gif-grid" element={<GifGridPage />} />
           </Routes>
         </div>
       </div>
