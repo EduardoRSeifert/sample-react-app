@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { GiphyFetch } from '@giphy/js-fetch-api';
+import React, { useState, useEffect, useCallback } from 'react';
+import fetchFromGiphy from './FetchFromGiphy';
 
 function GiphySearch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -9,20 +9,6 @@ function GiphySearch() {
   const [offset, setOffset] = useState(0);
 
   const [loading, setLoading] = useState(false);
-  
-  const api_key = process.env.REACT_APP_GIPHY_API_KEY;
-  const gf = new GiphyFetch(api_key);
-  const fetchFromGiphy = async () => {
-    try {
-      setLoading(true);
-      const result = await gf.search(searchQuery, { offset: offset, limit: 10 });
-      setSearchResult((prevResult) => [...prevResult, ...result.data]);
-    } catch(error){
-      console.error("Error fetching data:", error);
-    } finally{
-      setLoading(false);
-    }
-  };
 
   const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {   
@@ -37,9 +23,22 @@ function GiphySearch() {
     };
   }, []);
 
+  const doTheSearch = useCallback(async () => {
+    try {
+      setLoading(true);
+      let fetchedData = await fetchFromGiphy(searchQuery, offset);
+      setSearchResult((prevResult) => [...prevResult, ...fetchedData.data]);
+    } catch (error) {
+      console.error('Error in doTheSearch:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [searchQuery, offset])
+
   useEffect(() => {
-    fetchFromGiphy();
-  }, [offset]);
+    if(offset === 0) return;
+    doTheSearch();
+  }, [offset, searchQuery, doTheSearch]);
 
   return (
     <div className='container'>
@@ -56,7 +55,7 @@ function GiphySearch() {
       </div>
       <div className='row mt-3'>
         <div className='col-4'/>
-        <button onClick={fetchFromGiphy} className='col-4 btn btn-primary'>
+        <button onClick={doTheSearch} className='col-4 btn btn-primary'>
           Search
         </button>
       </div>
