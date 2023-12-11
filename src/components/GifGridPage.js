@@ -12,7 +12,6 @@ function GifGridPage() {
   const handleSearch = useCallback(async () => {
     try {
       const data = await fetchGridGifs(animal, tvShow, disneyCharacter, country);
-      console.log(data)
       setGifsData(data);
     } catch (error) {
       console.error('Error fetching gifs:', error);
