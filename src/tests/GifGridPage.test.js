@@ -60,4 +60,19 @@ describe('GifGridPage', () => {
     expect(screen.getAllByRole('img')).toHaveLength(8); // Assuming initial state has no gifs
   });
 
+  test('renders the GifGrid component with search inputs and button', () => {
+    render(<GifGridPage />);
+
+    const animalInput = screen.getByPlaceholderText(/Favourite Animal/i);
+    const tvShowInput = screen.getByPlaceholderText(/Favourite Tv Show/i);
+    const disneyCharacterInput = screen.getByPlaceholderText(/Favourite Disney Character/i);
+    const countryInput = screen.getByPlaceholderText(/Favourite Country/i);
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    expect(animalInput).toBeInTheDocument();
+    expect(tvShowInput).toBeInTheDocument();
+    expect(disneyCharacterInput).toBeInTheDocument();
+    expect(countryInput).toBeInTheDocument();
+    expect(searchButton).toBeInTheDocument();
+  });
 });
